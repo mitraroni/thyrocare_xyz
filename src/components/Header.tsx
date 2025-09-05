@@ -24,16 +24,25 @@ export const Header = () => {
     }, {
 
       _id: 2,
-      path: "/offer",
-      title: "Offer"
+      path: "/offers",
+      title: "Offers"
 
     },
     {
       _id: 3,
       path: "/blood-test",
       title: "Blood Test"
-    }
-
+    },
+    {
+      _id: 4,
+      path: "/blog",
+      title: "Blog"
+    },
+    {
+      _id: 5,
+      path: "/all-services",
+      title: "All Services"
+    },
   ]
   return (
     <header className="bg-background border-b shadow-md">
@@ -42,9 +51,14 @@ export const Header = () => {
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4" />
-              {/* <span>Phone: {contactInfo.phone}</span> */}
-              <span>Phone: 9663955546 </span>
+              <a
+                href="tel:9663955546"
+                className="flex items-center space-x-2 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                {/* <span>Phone: {contactInfo.phone}</span> */}
+                <span>Phone: 9663955546</span>
+              </a>
             </div>
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4" />
@@ -95,7 +109,7 @@ export const Header = () => {
               <ThemeToggle />
               <Button variant="medical-outline" size="sm" asChild>
                 <Link to="/admin">
-                  <Settings className="w-4 h-4 mr-2" />
+                  {/* <Settings className="w-4 h-4 mr-2" /> */}
                   Admin
                 </Link>
               </Button>

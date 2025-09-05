@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Clock, Shield, Users, Stethoscope } from "lucide-react";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+import TestCard from "./TestCard";
 import { BackgroundCarousel } from "@/components/BackgroundCarousel";
 import { useContent } from "@/contexts/ContentContext";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -42,22 +43,45 @@ export const HeroSection = () => {
     setForm({ name: '', email: '', address: '', phone: '', description: '', files: [] });
     setSubmitted(true);
   };
-  
+
+  const testPackages = [
+    { title: "Aarogyam C plus", tests: 97, price: "Rs1799" },
+    { title: "Aarogyam D plus", tests: 114, price: "Rs2999" },
+    { title: "Aarogyam Stree", tests: 110, price: "Rs2599" },
+    { title: "Aarogyam Purush", tests: 107, price: "Rs2599" },
+    { title: "Aarogyam E plus", tests: 118, price: "Rs3599" },
+    { title: "Aarogyam XL Plus", tests: 163, price: "Rs5999" },
+  ];
+  const handleCardClick = (title: string) => {
+    alert(`You clicked on ${title}`);
+  };
+
+
   return (
-    <section className="relative pt-8 pb-12 md:pt-4 md:pb-8 min-h-[600px] overflow-hidden">
-      <BackgroundCarousel images={sliders} />
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="relative pt-8 pb-12 md:pt-4 md:pb-8 min-h-[600px] overflow-hidden bg-[#77787E]">
+      {/* <BackgroundCarousel images={sliders} /> */}
+      <div className="container mx-auto px-4 relative z-10 ">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               {bannerContent.title}
-              <span className="text-medical-blue block mt-2">{bannerContent.subtitle}</span>
+              <span className="text-[#fff] block mt-2">{bannerContent.subtitle}</span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
+              {testPackages.map((pkg) => (
+                <TestCard
+                  key={pkg.title}
+                  title={pkg.title}
+                  tests={pkg.tests}
+                  price={pkg.price}
+                  onClick={() => handleCardClick(pkg.title)}
+                />
+              ))}
+            </div>
+            {/* <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
               {bannerContent.description}
-            </p>
+            </p> */}
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Dialog>
@@ -100,8 +124,7 @@ export const HeroSection = () => {
               </Link>
             </div>
 
-            {/* Features */}
-            <div className="grid grid-cols-2 gap-6 pt-8">
+            {/* <div className="grid grid-cols-2 gap-6 pt-8">
               {aboutSection.features.map((feature, index) => (
                 <div key={index} className="text-center">
                   <div className="w-16 h-16 bg-medical-blue rounded-full flex items-center justify-center mx-auto mb-3">
@@ -113,7 +136,10 @@ export const HeroSection = () => {
                   <p className="text-base font-medium">{feature}</p>
                 </div>
               ))}
-            </div>
+            </div> */}
+
+
+
           </div>
 
           {/* Right content - Doctor image placeholder */}
@@ -127,7 +153,7 @@ export const HeroSection = () => {
                   <img src="/public/main.jpg" alt="Doctor" className="rounded-lg" />
                 </div>
               </div>
-              
+
               <div className="mt-6 text-center">
                 <h3 className="text-xl font-bold text-gray-900">{aboutSection.title}</h3>
                 <p className="text-gray-600 mt-2">
