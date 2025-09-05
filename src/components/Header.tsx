@@ -7,14 +7,34 @@ import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { useMenu } from "@/contexts/MenuContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAdmin } from "@/contexts/AdminContext";
-
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { contactInfo } = useContactInfo();
   const { siteSettings } = useSiteSettings();
   const { menuItems } = useMenu();
   const { isLoggedIn } = useAdmin();
+  const staticmenu = [
 
+    {
+
+      _id: 1,
+      path: "/",
+      title: "Home"
+
+    }, {
+
+      _id: 2,
+      path: "/offer",
+      title: "Offer"
+
+    },
+    {
+      _id: 3,
+      path: "/blood-test",
+      title: "Blood Test"
+    }
+
+  ]
   return (
     <header className="bg-background border-b shadow-md">
       {/* Top contact bar */}
@@ -23,46 +43,54 @@ export const Header = () => {
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4" />
-              <span>Phone: {contactInfo.phone}</span>
+              {/* <span>Phone: {contactInfo.phone}</span> */}
+              <span>Phone: 9663955546 </span>
             </div>
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4" />
-              <span>Hours: {contactInfo.businessHours}</span>
+              {/* <span>Hours: {contactInfo.businessHours}</span> */}
+              <span>Hours: Mon-Fri 9:00AM-6:00PM</span>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <Mail className="w-4 h-4" />
-            <span className="hidden sm:inline">{contactInfo.email}</span>
+            <a
+              href="mailto:aarogyamcenter1@gmail.com"
+              className="flex items-center space-x-2  transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              <span className="hidden sm:inline">aarogyamcentre1@gmail.com</span>
+            </a>
           </div>
         </div>
       </div>
-
-      {/* Main navigation */}
       <nav className="container mx-auto px-4">
         <div className="flex justify-between items-center min-h-[80px]">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-medical-blue rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">T</span>
+          <Link to={"/"}>
+
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-medical-blue rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">T</span>
+              </div>
+              <h1 className="text-xl md:text-2xl font-bold text-medical-blue flex items-center">
+                <span className="text-medical-red">T</span>hyrocare
+              </h1>
             </div>
-            <h1 className="text-xl md:text-2xl font-bold text-medical-blue flex items-center">
-              <span className="text-medical-red">T</span>hyrocare
-            </h1>
-          </div>
+          </Link>
 
           {/* Desktop Menu and Auth Buttons */}
           <div className="hidden md:flex items-center">
             <div className="flex items-center space-x-10">
-              {menuItems.map((item) => (
-                <Link 
+              {staticmenu.map((item) => (
+                <Link
                   key={item._id}
-                  to={item.path} 
+                  to={item.path}
                   className="text-foreground hover:text-medical-blue transition-colors font-medium"
                 >
                   {item.title}
                 </Link>
               ))}
             </div>
-            
+
             <div className="flex items-center space-x-3 ml-10">
               <ThemeToggle />
               <Button variant="medical-outline" size="sm" asChild>
@@ -97,16 +125,16 @@ export const Header = () => {
           <div className="md:hidden pb-4 border-t">
             <div className="flex flex-col space-y-2 pt-4">
               {menuItems.map((item) => (
-                <Link 
+                <Link
                   key={item._id}
-                  to={item.path} 
+                  to={item.path}
                   className="text-foreground hover:text-medical-blue transition-colors py-2 px-4 rounded-md"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.title}
                 </Link>
               ))}
-              
+
               <div className="border-t my-2"></div>
 
               <div className="flex flex-col space-y-2 pt-2 px-4">
